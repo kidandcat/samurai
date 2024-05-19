@@ -1,0 +1,274 @@
+[gd_scene load_steps=23 format=3 uid="uid://dpu6rlo1k73bl"]
+
+[ext_resource type="Texture2D" uid="uid://dnvjrid2cy8gc" path="res://assets/empty.png" id="1_bbrb4"]
+[ext_resource type="Script" path="res://hud.gd" id="1_lvl6p"]
+[ext_resource type="Texture2D" uid="uid://d25pjtnd5e443" path="res://assets/red_full.png" id="2_uccxb"]
+[ext_resource type="Texture2D" uid="uid://cmc2ks4no3ltu" path="res://assets/blue_full.png" id="3_aa6cw"]
+[ext_resource type="Texture2D" uid="uid://chvbhq44lvwrk" path="res://assets/blood.png" id="4_cjkq1"]
+[ext_resource type="FontFile" uid="uid://bc8oeava7f1qt" path="res://assets/DungeonFont.ttf" id="6_oscuv"]
+[ext_resource type="Texture2D" uid="uid://baxrp728xa264" path="res://assets/emoji.png" id="7_7aw4j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ye70u"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(0, 558, 110, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nu4gi"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(110, 558, 110, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvvfb"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(220, 558, 110, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyybt"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(330, 558, 110, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_loa0e"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(440, 558, 110, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8bl7"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(550, 558, 110, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgkha"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(660, 558, 110, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2nfq"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(770, 558, 110, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8e05m"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(880, 558, 110, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hoay1"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(990, 558, 110, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xffah"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(1100, 558, 110, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whyk6"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(1210, 558, 110, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27bsm"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(1320, 558, 110, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32r5g"]
+atlas = ExtResource("4_cjkq1")
+region = Rect2(1430, 558, 110, 93)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wsaw2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ye70u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nu4gi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvvfb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyybt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_loa0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8bl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgkha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2nfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8e05m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hoay1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xffah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whyk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27bsm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32r5g")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="HUD" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lvl6p")
+
+[node name="HP" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -2.0
+offset_right = 21.0
+offset_bottom = 28.0
+scale = Vector2(3, 3)
+max_value = 4.0
+step = 0.1
+rounded = true
+fill_mode = 3
+nine_patch_stretch = true
+texture_under = ExtResource("1_bbrb4")
+texture_progress = ExtResource("2_uccxb")
+texture_progress_offset = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="Blood" type="AnimatedSprite2D" parent="HP"]
+visible = false
+position = Vector2(24.3333, 45.3333)
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_wsaw2")
+frame_progress = 0.691297
+speed_scale = 3.0
+
+[node name="MP" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 718.0
+offset_top = -2.0
+offset_right = 748.0
+offset_bottom = 28.0
+scale = Vector2(3, 3)
+max_value = 15.0
+step = 0.1
+fill_mode = 3
+nine_patch_stretch = true
+texture_under = ExtResource("1_bbrb4")
+texture_progress = ExtResource("3_aa6cw")
+
+[node name="Winner" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 188.0
+offset_top = 63.0
+offset_right = 763.0
+offset_bottom = 263.0
+theme_override_fonts/font = ExtResource("6_oscuv")
+theme_override_font_sizes/font_size = 150
+text = "Winner"
+
+[node name="Loser" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 151.0
+offset_top = 61.0
+offset_right = 726.0
+offset_bottom = 261.0
+theme_override_fonts/font = ExtResource("6_oscuv")
+theme_override_font_sizes/font_size = 150
+text = "You lose"
+
+[node name="Countdown" type="Label" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 0
+offset_left = 370.0
+offset_top = 76.0
+offset_right = 545.0
+offset_bottom = 270.0
+theme_override_fonts/font = ExtResource("6_oscuv")
+theme_override_font_sizes/font_size = 150
+text = "1"
+
+[node name="Emojis" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 452.0
+offset_right = 40.0
+offset_bottom = 492.0
+
+[node name="Wink" type="Sprite2D" parent="Emojis"]
+position = Vector2(197, 5)
+texture = ExtResource("7_7aw4j")
+region_enabled = true
+region_rect = Rect2(129, 96, 30, 30)
+
+[node name="WinkKey" type="Label" parent="Emojis"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 23.0
+offset_right = 234.0
+offset_bottom = 39.0
+text = "1"
+
+[node name="Joke" type="Sprite2D" parent="Emojis"]
+position = Vector2(290, 5)
+texture = ExtResource("7_7aw4j")
+region_enabled = true
+region_rect = Rect2(161, 160, 30, 30)
+
+[node name="JokeKey" type="Label" parent="Emojis"]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 23.0
+offset_right = 326.0
+offset_bottom = 39.0
+text = "2"
+
+[node name="Shit" type="Sprite2D" parent="Emojis"]
+position = Vector2(381, 6)
+texture = ExtResource("7_7aw4j")
+region_enabled = true
+region_rect = Rect2(193, 160, 30, 30)
+
+[node name="ShitKey" type="Label" parent="Emojis"]
+layout_mode = 0
+offset_left = 377.0
+offset_top = 25.0
+offset_right = 417.0
+offset_bottom = 41.0
+text = "3"
+
+[node name="Question" type="Sprite2D" parent="Emojis"]
+position = Vector2(480, 5)
+texture = ExtResource("7_7aw4j")
+region_enabled = true
+region_rect = Rect2(65, 64, 30, 30)
+
+[node name="QuestionKey" type="Label" parent="Emojis"]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 25.0
+offset_right = 516.0
+offset_bottom = 41.0
+text = "4"
+
+[node name="Zzz" type="Sprite2D" parent="Emojis"]
+position = Vector2(570, 5)
+texture = ExtResource("7_7aw4j")
+region_enabled = true
+region_rect = Rect2(97, 64, 30, 30)
+
+[node name="ZzzKey" type="Label" parent="Emojis"]
+layout_mode = 0
+offset_left = 566.0
+offset_top = 24.0
+offset_right = 606.0
+offset_bottom = 40.0
+text = "5"

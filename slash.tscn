@@ -1,0 +1,145 @@
+[gd_scene load_steps=19 format=3 uid="uid://1q187ottkgt2"]
+
+[ext_resource type="Script" path="res://slash.gd" id="2_47aet"]
+[ext_resource type="Texture2D" uid="uid://b1kj2m87durh6" path="res://assets/slash3.png" id="2_pbq8d"]
+[ext_resource type="Texture2D" uid="uid://ms5ejf86b20" path="res://assets/parry_hit.png" id="3_gkdom"]
+[ext_resource type="AudioStream" uid="uid://d35kah336edyk" path="res://assets/sfx/slash.wav" id="4_fqclt"]
+[ext_resource type="AudioStream" uid="uid://dnwrqhalorp4p" path="res://assets/sfx/shuriken_hit.wav" id="5_3pbhe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8np4p"]
+atlas = ExtResource("2_pbq8d")
+region = Rect2(0, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3g51a"]
+atlas = ExtResource("2_pbq8d")
+region = Rect2(64, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5av71"]
+atlas = ExtResource("2_pbq8d")
+region = Rect2(128, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrq4w"]
+atlas = ExtResource("2_pbq8d")
+region = Rect2(192, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_luh78"]
+atlas = ExtResource("2_pbq8d")
+region = Rect2(256, 0, 64, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d6ldj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8np4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3g51a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5av71")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrq4w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_luh78")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7vfc8"]
+radius = 27.0
+height = 70.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_su43c"]
+atlas = ExtResource("3_gkdom")
+region = Rect2(0, 0, 56, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlwjl"]
+atlas = ExtResource("3_gkdom")
+region = Rect2(56, 0, 56, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmttp"]
+atlas = ExtResource("3_gkdom")
+region = Rect2(112, 0, 56, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cx23w"]
+atlas = ExtResource("3_gkdom")
+region = Rect2(168, 0, 56, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_16pfi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_su43c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlwjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmttp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cx23w")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xnje7"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Slash:frame")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("Slash:visible")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("Break:frame")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath("Break:visible")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+
+[node name="Slash" type="Node2D"]
+script = ExtResource("2_47aet")
+
+[node name="Slash" type="AnimatedSprite2D" parent="."]
+position = Vector2(34, 11)
+scale = Vector2(1, 2)
+sprite_frames = SubResource("SpriteFrames_d6ldj")
+speed_scale = 2.0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(24, 0)
+shape = SubResource("CapsuleShape2D_7vfc8")
+
+[node name="Break" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(32, 0)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_16pfi")
+speed_scale = 0.5
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_xnje7")
+
+[node name="Start" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_fqclt")
+autoplay = true
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_3pbhe")
+
+[connection signal="animation_finished" from="Slash" to="." method="_on_slash_animation_finished"]

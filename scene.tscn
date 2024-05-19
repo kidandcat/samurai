@@ -1,0 +1,181 @@
+[gd_scene load_steps=20 format=3 uid="uid://l06boptnq87m"]
+
+[ext_resource type="Texture2D" uid="uid://c5pjmew3xe0bj" path="res://assets/sky.png" id="1_emqep"]
+[ext_resource type="Script" path="res://scene.gd" id="1_g6naw"]
+[ext_resource type="Texture2D" uid="uid://dbh8d8kr7yoau" path="res://assets/sun.png" id="2_nvqyy"]
+[ext_resource type="Texture2D" uid="uid://cf8yitvabhdv" path="res://assets/background2.png" id="3_urqvk"]
+[ext_resource type="Texture2D" uid="uid://0irplriu2p5u" path="res://assets/background1.png" id="4_midsa"]
+[ext_resource type="Texture2D" uid="uid://di24vtl8upptn" path="res://assets/cloud1.png" id="5_4ofir"]
+[ext_resource type="Texture2D" uid="uid://dpferu4uc2awr" path="res://assets/cloud2.png" id="6_4e1ki"]
+[ext_resource type="Texture2D" uid="uid://dxaervew4fkl" path="res://assets/floor.png" id="7_8y0vw"]
+[ext_resource type="Texture2D" uid="uid://bqii57w3w2vyt" path="res://assets/tree.png" id="8_f34k3"]
+[ext_resource type="PackedScene" uid="uid://dv1ndmnrjhtvr" path="res://player.tscn" id="9_b70u6"]
+[ext_resource type="PackedScene" uid="uid://c3o07ocl0e7gh" path="res://entity_spawner.tscn" id="10_kuxn3"]
+[ext_resource type="PackedScene" uid="uid://bieammatkei2y" path="res://petal_spawner.tscn" id="11_f487x"]
+[ext_resource type="AudioStream" uid="uid://cgkruvqhwf6n3" path="res://assets/ambient.wav" id="12_hwge8"]
+[ext_resource type="AudioStream" uid="uid://dy7ilji352688" path="res://assets/battle.wav" id="13_b6y4a"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u6hag"]
+width = 682
+height = 330
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_cagvf"]
+b = Vector2(202, 41)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tjc1e"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lxrew"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_72pry"]
+normal = Vector2(-1, 0)
+
+[node name="Scene" type="Node2D"]
+script = ExtResource("1_g6naw")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0.01)
+
+[node name="Sky" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(538, 222)
+scale = Vector2(1.5975, 1.61)
+texture = ExtResource("1_emqep")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.02, 0.01)
+
+[node name="Sun" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(369, 214)
+texture = ExtResource("2_nvqyy")
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.03, 0.01)
+
+[node name="Cloud1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2(442, 38)
+texture = ExtResource("5_4ofir")
+
+[node name="Cloud2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2(614, 74)
+texture = ExtResource("6_4e1ki")
+
+[node name="Cloud3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2(142, 28)
+texture = ExtResource("6_4e1ki")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.04, 0.01)
+
+[node name="Background2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(327, 207)
+texture = ExtResource("3_urqvk")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.05, 0.01)
+
+[node name="Background1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(249, 261)
+texture = ExtResource("4_midsa")
+
+[node name="Floor" type="Sprite2D" parent="."]
+position = Vector2(371, 366)
+scale = Vector2(1.29, 2.60714)
+texture = ExtResource("7_8y0vw")
+
+[node name="Tree" type="Sprite2D" parent="."]
+position = Vector2(408, 208)
+texture = ExtResource("8_f34k3")
+
+[node name="EntitySpawner" parent="." instance=ExtResource("10_kuxn3")]
+
+[node name="ScreenLimits" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.239216)
+position = Vector2(341, 165)
+texture = SubResource("NoiseTexture2D_u6hag")
+metadata/_edit_lock_ = true
+
+[node name="PetalSpawner" parent="." instance=ExtResource("11_f487x")]
+position = Vector2(280, 150)
+
+[node name="PetalSpawner2" parent="." instance=ExtResource("11_f487x")]
+position = Vector2(235, 209)
+
+[node name="PetalSpawner3" parent="." instance=ExtResource("11_f487x")]
+position = Vector2(349, 161)
+
+[node name="PetalSpawner4" parent="." instance=ExtResource("11_f487x")]
+position = Vector2(458, 120)
+
+[node name="PetalSpawner5" parent="." instance=ExtResource("11_f487x")]
+position = Vector2(529, 128)
+
+[node name="PetalSpawner6" parent="." instance=ExtResource("11_f487x")]
+position = Vector2(590, 135)
+
+[node name="PetalSpawner7" parent="." instance=ExtResource("11_f487x")]
+position = Vector2(492, 176)
+
+[node name="PetalSpawner8" parent="." instance=ExtResource("11_f487x")]
+position = Vector2(532, 221)
+
+[node name="PetalSpawner9" parent="." instance=ExtResource("11_f487x")]
+position = Vector2(399, 188)
+
+[node name="TreeBox" type="StaticBody2D" parent="."]
+collision_layer = 4
+
+[node name="tree" type="CollisionShape2D" parent="TreeBox"]
+position = Vector2(273, 191)
+shape = SubResource("SegmentShape2D_cagvf")
+one_way_collision = true
+one_way_collision_margin = 5.0
+
+[node name="WorldBox" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="Floor" type="CollisionShape2D" parent="WorldBox"]
+position = Vector2(365, 326)
+shape = SubResource("WorldBoundaryShape2D_tjc1e")
+
+[node name="Left" type="CollisionShape2D" parent="WorldBox"]
+position = Vector2(2, 172)
+shape = SubResource("WorldBoundaryShape2D_lxrew")
+
+[node name="Right" type="CollisionShape2D" parent="WorldBox"]
+position = Vector2(679, 184)
+shape = SubResource("WorldBoundaryShape2D_72pry")
+
+[node name="Player" parent="." instance=ExtResource("9_b70u6")]
+position = Vector2(420, 300)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn", "res://slash.tscn", "res://shot.tscn", "res://petal1.tscn")
+spawn_path = NodePath("..")
+
+[node name="Register" type="HTTPRequest" parent="."]
+
+[node name="Ping" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Countdown" type="Timer" parent="."]
+process_mode = 3
+
+[node name="WindMaker" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Ambient" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_hwge8")
+volume_db = -10.0
+
+[node name="Battle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_b6y4a")
+volume_db = -10.0
+
+[connection signal="request_completed" from="Register" to="." method="_on_register_request_completed"]
+[connection signal="timeout" from="Ping" to="." method="register"]
+[connection signal="timeout" from="Countdown" to="." method="_on_countdown_timeout"]
+[connection signal="timeout" from="WindMaker" to="." method="_on_wind_maker_timeout"]

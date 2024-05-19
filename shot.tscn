@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://xaf0loadeclc"]
+
+[ext_resource type="Script" path="res://shot.gd" id="1_m5886"]
+[ext_resource type="Texture2D" uid="uid://byjrw48oedkur" path="res://assets/dart_hit.png" id="2_r75tf"]
+[ext_resource type="AudioStream" uid="uid://cjicvj0hjin8l" path="res://assets/sfx/shuriken.wav" id="3_8drth"]
+[ext_resource type="AudioStream" uid="uid://dnwrqhalorp4p" path="res://assets/sfx/shuriken_hit.wav" id="4_1jb1c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i32u3"]
+atlas = ExtResource("2_r75tf")
+region = Rect2(0, 0, 41, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0gu4"]
+atlas = ExtResource("2_r75tf")
+region = Rect2(41, 0, 41, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6m1jt"]
+atlas = ExtResource("2_r75tf")
+region = Rect2(82, 0, 41, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bwiw"]
+atlas = ExtResource("2_r75tf")
+region = Rect2(123, 0, 41, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d6ldj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i32u3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0gu4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6m1jt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bwiw")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u0tm4"]
+radius = 10.0499
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xnje7"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Slash:frame")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("Slash:visible")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("Slash:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:modulate")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+
+[node name="Shot" type="CharacterBody2D"]
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 0
+slide_on_ceiling = false
+floor_stop_on_slope = false
+floor_block_on_wall = false
+script = ExtResource("1_m5886")
+
+[node name="Slash" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d6ldj")
+frame = 1
+speed_scale = 3.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u0tm4")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 19
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_u0tm4")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_xnje7")
+
+[node name="Start" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8drth")
+autoplay = true
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_1jb1c")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

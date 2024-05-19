@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://crvltgk8mhmo6"]
+
+[ext_resource type="Script" path="res://petal.gd" id="1_crw2h"]
+[ext_resource type="Texture2D" uid="uid://cakyyr03ecaue" path="res://assets/sakura.png" id="2_i7dpr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u0tm4"]
+radius = 2.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_c6pq6"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Sprite:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:modulate")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[node name="Petal" type="CharacterBody2D"]
+rotation = 1.5708
+collision_layer = 16
+collision_mask = 2
+slide_on_ceiling = false
+floor_stop_on_slope = false
+floor_block_on_wall = false
+script = ExtResource("1_crw2h")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_i7dpr")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u0tm4")
+
+[node name="Die" type="Timer" parent="."]
+one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_c6pq6")
+
+[connection signal="timeout" from="Die" to="." method="destroy"]
